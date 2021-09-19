@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  app:
+    restart: always
+    build:
+      context: .
+    ports:
+      - "3003:3003"
+    volumes:
+      - ./app:/app
+    command: >
+      sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:3003"
+    environment: 
+        - DB_HOST=db
+        - DB_NAME=mydb-dev
+        - DB_USER=admin
+        - DB_PASS=admin
+
